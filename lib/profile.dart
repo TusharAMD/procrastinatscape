@@ -11,6 +11,16 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Center(
+      child: Container(
+        child: GestureDetector(
+          onTap: () {},
+          child: Image.network("https://i.imgur.com/yczPzHD.png",
+          fit: BoxFit.fitHeight,
+          height: 100,
+          ),
+        ),
+      ),
+    );
   }
 }

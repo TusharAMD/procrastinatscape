@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'addtask.dart';
+import 'restapi.dart';
 
 class HomePageH extends StatefulWidget {
   HomePageH({Key? key}) : super(key: key);
@@ -15,9 +16,17 @@ class _HomePageHState extends State<HomePageH> {
 
   @override
   void initState(){
-    
+    super.initState();
+    //getData();
   }
   
+  getData() async {
+    cards = (await RestAPI().getPosts())?.cast<Card>();
+    print(cards);
+  }
+
+  List<String> data_api = ["Go to Gym", "Complete Assignment", "Solve on Codechef"];
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -74,14 +83,40 @@ class _HomePageHState extends State<HomePageH> {
             ),
           ),
         ),
-      Text("LIST HERE"),
       Expanded(
         child: SizedBox(
           child: ListView.builder(
-            itemCount: 2,
+            itemCount: 3,
             itemBuilder: (context, index) {
               return Container(
-                child: Text("Hi"),
+                child: Card(
+                margin: EdgeInsets.all(10),
+                  elevation: 20,
+                  shape: RoundedRectangleBorder(
+                      side:  BorderSide(color: Colors.green,width: 3),
+                      borderRadius: BorderRadius.all(Radius.circular(15))
+                  ),
+                  shadowColor: Colors.green[100],
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      ListTile(
+                        leading: Icon (
+                            Icons.album,
+                            color: Color.fromARGB(255, 255, 147, 58),
+                            size: 45
+                        ),
+                        title: Text(
+                          '${data_api[index]}',
+                          style: TextStyle(fontSize: 20),
+                        ),
+
+                        subtitle: Text('Completed'),
+                      ),
+                    ],
+                  ),
+
+                ),
               );
             },
           ),

@@ -4,9 +4,9 @@
 
 import 'dart:convert';
 
-Api apiFromJson(String str) => Api.fromJson(json.decode(str));
+List<Api> apiFromJson(String str) => List<Api>.from(json.decode(str).map((x) => Api.fromJson(x)));
 
-String apiToJson(Api data) => json.encode(data.toJson());
+String apiToJson(List<Api> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class Api {
     Api({

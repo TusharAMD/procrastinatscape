@@ -9,6 +9,10 @@ cors = CORS(app)
 @cross_origin()
 @app.route('/addtask')
 def addtask():
+    client = pymongo.MongoClient("mongodb+srv://admin:admin@cluster0.wonbr.mongodb.net/?retryWrites=true&w=majority")
+    db = client.MentalHacks
+    col = db["cards"]
+    
     return {"status":200}
 
 @cross_origin()
@@ -23,8 +27,6 @@ def getCards():
         x.pop("_id")
         retDict["res"].append(x)
         print(x)
-
-
     return retDict
 
 if __name__ == '__main__':
